@@ -1,0 +1,184 @@
+<div class="card mb-0 pb-0">
+    <div class="alert alert-primary modal-head bg-gradient border-0 rounded m-0 d-flex align-items-center shadow" role="alert">
+        <div class="flex-grow-1 fw-semibold text-body">
+            <span><i class="mdi mdi-account-plus"></i> Unggah Produk Baru</span>
+        </div>
+        <div class="flex-shrink-0">
+            <button type="button" class="btn btn-sm btn-soft-danger rounded-3" ng-click="add.close()"><i class="fs-14 mdi mdi-close-thick"></i></button>
+        </div>
+    </div>
+    <div class="card-body bg-light rounded-bottom">
+        <form name="addForm" ng-submit="add.save()">
+            <div id="iklan" class="card">
+                <div class="card-body">
+                    <h5><i class="ri-list-check align-middle"></i> Informasi Produk</h5>
+                    <div id="info-produk" class="row">
+                        <div class="col-12">
+                            <div id="uploadFiles" class="mt-3">
+                                <filepond ng-model="files" multiple></filepond>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="Nameinput" class="form-label">Nama Produk</label>
+                                <div class="form-icon">
+                                    <input type="text" class="form-control form-control-icon" id="Nameinput" placeholder="contoh: baju koko dewasa" ng-model="add.produk.nama_produk">
+                                    <i class="mdi mdi-account-edit-outline"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="categories" class="form-label">Kategori</label>
+                                <select class="form-select mb-3" aria-label="Default categories" ng-options="item as item.nama for item in add.kategori track by item.id" ng-model="add.produk.kategori">
+                                    <option value="" selected disabled>buka kategori</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="desc" class="form-label">Deskripsi</label>
+                                <textarea auto-resize name="desc" id="desc" rows="2" class="form-control" placeholder="deskripsi produk {{add.produk.deskripsi}}" ng-model="add.produk.deskripsi"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="bahan" class="form-label">Bahan</label>
+                                <div class="form-icon">
+                                    <input type="text" class="form-control form-control-icon" id="bahan" placeholder="masukan jenis bahan" ng-model="add.produk.bahan">
+                                    <i class="mdi mdi-card-account-mail"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Harga Produk</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-price">Rp</span>
+                                    <input type="text" class="form-control" placeholder="masukan harga untuk semua" ng-model="add.produk.harga_produk_iklan" aria-label="price" aria-describedby="basic-price">
+                                </div>
+                                <span class="text-danger fs-11">harga untuk semua produk</span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="potongan" class="form-label">Potongan Harga (opsional)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="masukan potongan" aria-label="discount-time" ng-model="add.produk.potongan_iklan" aria-describedby="basic-discount-time">
+                                    <span class="input-group-text" id="basic-discount-time">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ready" class="card">
+                <div class="card-body">
+                    <h5><i class="ri-list-check align-middle"></i> Informasi Penjualan</h5>
+                    <div class="info-penjualan">
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 me-3">
+                                <label for="Variasi" class="form-label">Variasi Warna</label>
+                            </div>
+                            <div class="flex-grow-1 bg-light rounded-3">
+                                <div class="pt-3">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <!-- <label for="Variasi1" class="fw-normal"><span class="mb-0 fs-12 text-danger text-decoration-underline">{{add.produk.variasi1.nama_variasi}}</span></label> -->
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="row mb-3">
+                                                <div class="col-md-5">
+                                                    <select class="form-select"
+                                                            aria-label="Default select Variasi1"
+                                                            ng-model="add.produk.variasi1"
+                                                            ng-options="itemv1 as itemv1.nama_variasi disable when add.usedVariasi[itemv1.nama_variasi] && itemv1.nama_variasi !== add.produk.variasi1.nama_variasi for itemv1 in add.listVariasi1 track by itemv1.id"
+                                                            ng-change="add.handleChange1()">
+                                                        <option value="" selected disabled>Pilih Variasi 1</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3" ng-if="add.formWarna">
+                                                <div class="col-md-5 d-flex" ng-repeat="warna in add.selectedWarna track by $index">
+                                                    <div class="flex-grow-1">
+                                                        <select class="form-select mb-3"
+                                                            aria-label="Default select opsiv1"
+                                                            ng-model="warna.selected"
+                                                            ng-options="opsiv1 as opsiv1.nama for opsiv1 in add.listWarna track by opsiv1.idWarna"
+                                                            ng-change="add.updateDropdown()">
+                                                            <option value="" selected disabled>Pilih Warna</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="flex-shrink-0 ms-1"><a href class="text-danger float-end" ng-click="add.selectedWarna.splice($index, 1); add.removeEmptyDropdowns($index)"><i class="mdi mdi-close-thick fw-medium fs-16"></i></a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tabel-preview" class="bg-white mb-0 pb-0 rounded-3">
+                                    <div class="container mt-4">
+                                        <table class="table table-nowrap table-borderless">
+                                            <tbody ng-repeat="variation in add.selectedVariations track by $index">
+                                                <tr>
+                                                    <td width="5">#{{$index + 1}}</td>
+                                                    <td colspan="4">
+                                                        <p class="mb-1 fw-medium fs-14">Warna: {{variation.warna}}</p>
+                                                        <filepond ng-model="imgPenjualan" class="w-50"></filepond>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="5">
+                                                        <table class="table table-nowrap mb-0">
+                                                            <thead class="table-light">
+                                                                <tr>
+                                                                    <th class="fw-normal">Ukuran</th>
+                                                                    <th class="fw-normal">Harga <s>Coret</s></th>
+                                                                    <th class="fw-normal">Harga Asli</th>
+                                                                    <th class="fw-normal">Stok</th>
+                                                                    <th class="fw-normal">Kode Variasi</th>
+                                                                    <th class="fw-normal"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="kriteria in variation.konfigKriteria track by $index">
+                                                                    <th>
+                                                                        <input type="text" class="form-control form-control-sm" placeholder="Masukkan Ukuran" ng-model="kriteria.ukuran">
+                                                                    </th>
+                                                                    <td>
+                                                                        <input type="text" class="form-control form-control-sm" placeholder="Masukkan Harga" ng-model="kriteria.coret">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control form-control-sm" placeholder="Masukkan Harga" ng-model="kriteria.harga">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control form-control-sm" placeholder="Masukkan Stok" ng-model="kriteria.stok">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="form-control form-control-sm" placeholder="Masukkan Kode" ng-model="kriteria.kode">
+                                                                    </td>
+                                                                    <td class="align-middle">
+                                                                        <button type="button" ng-click="add.tambahKriteria($parent.$index)" class="btn btn-soft-primary btn-sm">
+                                                                            <i class="las la-plus"></i> Tambah Kriteria
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-soft-danger btn-sm" ng-disabled="variation.konfigKriteria.length < 2" ng-class="{'btn-light':variation.konfigKriteria.length < 2}" ng-click="add.hapusKriteria($parent.$index, $index)">
+                                                                            <i class="las la-trash"></i> Hapus
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="w-100 btn btn-info btn-label waves-effect waves-light"><i class="mdi mdi-content-save label-icon align-middle fs-16 me-2"></i> Publikasi Produk</button>
+        </form>
+    </div>
+</div>          

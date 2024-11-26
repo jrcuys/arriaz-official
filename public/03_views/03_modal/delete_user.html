@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="alert alert-dark bg-gradient border-0 rounded-0 m-0 d-flex align-items-center" role="alert">
+        <div class="flex-grow-1 fw-semibold text-body">
+            <span>Hapus Data Pengguna?</span>
+        </div>
+        <div class="flex-shrink-0">
+            <button class="btn btn-sm btn-soft-danger rounded-circle" ng-click="rm.close()">
+                <i class="mdi mdi-close-thick fs-16"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body border-0 p-0 border-top border-top-dashed">
+        <div class="user-chats bg-article w-100 rounded-3 p-2">
+            <div class="position-relative">
+                <div class="position-relative" id="users-chat">
+                    <div class="bg-dark bg-gradient d-block d-sm-none p-2 px-2 user-chat-topbar bg-light rounded-2 border-bottom">
+                        <div class="row align-items-center">
+                            <div class="col-sm-4 col-md-10">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0 d-block d-lg-none me-3">
+                                        <a href class="user-chat-remove fs-18 p-1" ng-click="rm.close()"><i class="ri-arrow-left-s-line align-middle"></i> <span class="fs-15">Tutup</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 p-lg-2">
+                        <div class="mt-2" tabindex="0" role="region" aria-label="scrollable content">
+                            <div class="mt-2 text-center">
+                                <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                <div class="mt-4 pt-2 mx-4 mx-sm-5">
+                                    <h5>Apa anda yakin?</h5>
+                                    <p class="fs-13 mx-4 mb-0">Jika anda menghapus data <span class="fw-medium">{{rm.user.name}}</span>, maka pengguna tidak akan bisa login kembali ke akun Google</p>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                                <button type="button" class="btn w-sm btn-light" ng-click="rm.close()">Batal</button>
+                                <button type="button" class="btn w-sm btn-danger" ng-click="rm.remove()">Yakin dan Hapus!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,168 @@
+<div class="card border-top border-top-dashed">
+    <div class="card-header align-items-center d-flex border-bottom border-bottom-dashed bg-light">
+        <h4 class="card-title mb-0 flex-grow-1"><i class="mdi mdi-pen-plus"></i> Daftar Siswa Baru 2023/2024</h4>
+        <div class="flex-shrink-0">
+            <div class="dropdown card-header-dropdown">
+                <a class="fw-medium text-decoration-underline" href ng-click="main.viewTerms()">
+                    Lihat Persyaratan
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form name="formReg" ng-submit="formReg.$valid && main.sendRegister()">
+            <div class="row">
+                <div class="col-12">
+                    <h6 class="fw-semibold fs-16"><i class="mdi mdi-dots-grid"></i> Data Diri</h6>
+                </div>
+                <div class="col-sm-6 col-md-8">
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">Nama Lengkap</label>
+                        <input type="text" ng-model="main.studentData.nama" class="form-control" placeholder="nama lengkap anda (calon siswa)" id="nama" required>
+                    </div>
+                </div><!--end col-->
+                <div class="col-sm-6 col-md-4">
+                    <div class="mb-3">
+                        <label for="nama" class="form-label">NISN</label>
+                        <input type="text" ng-model="main.studentData.nisn" class="form-control" placeholder="NISN (calon siswa)" id="nisn" required>
+                    </div>
+                </div><!--end col-->
+                <div class="col-sm-6 col-md-4">
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Jenis Kelamin</label>
+                        <select id="gender" class="form-select" ng-model="main.studentData.jenis_kelamin" required>
+                            <option selected disabled value>silahkan pilih...</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                </div><!--end col-->
+                <div class="col-sm-6 col-md-4">
+                    <div class="mb-3">
+                        <label for="placeBirth" class="form-label">Tempat Lahir</label>
+                        <input type="text" ng-model="main.studentData.tempat_lahir" class="form-control" placeholder="contoh: Ciamis" id="placeBirth" required>
+                    </div>
+                </div><!--end col-->
+                <div class="col-sm-6 col-md-4">
+                    <div class="mb-3">
+                        <label for="tglLahir" class="form-label">Tanggal Lahir</label>
+                        <input type="date" ng-model="main.studentData.tgl_lahir" class="form-control" placeholder="contoh: Ciamis" id="tglLahir" required>
+                    </div>
+                </div><!--end col-->
+                <div class="col-sm-6 col-md-6">
+                    <div class="mb-3">
+                        <label for="religion" class="form-label">Agama</label>
+                        <select id="religion" class="form-select" ng-model="main.studentData.agama" required>
+                            <option selected disabled value>silahkan pilih...</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Budha">Budha</option>
+                            <option value="Konghucu">Konghucu</option>
+                            <option value="Kristen Katolik">Kristen Katolik</option>
+                            <option value="Kristen Protestan">Kristen Protestan</option>
+                        </select>
+                    </div>
+                </div><!--end col-->
+                <div class="col-sm-6 col-md-6">
+                    <div class="mb-3">
+                        <label for="tglLahir" class="form-label">Nomor Telepon/WhatsApp</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="lab la-whatsapp"></i></span>
+                            <input type="text" 
+                                    ng-model="main.studentData.kontak" 
+                                    class="form-control" 
+                                    placeholder="contoh: 082111222333" 
+                                    aria-label="contact" 
+                                    aria-describedby="contact"
+                                    id="kontak"
+                                    name="kontak"
+                                    minlength="11"
+                                    required
+                                    ng-class="[
+                                        {'form-control is-invalid': formReg.kontak.$error.minlength},
+                                        {'form-control is-valid': formReg.kontak.$valid},
+                                        {'form-control' : formReg.kontak}
+                                    ]">
+                        </div>
+                    </div>
+                </div><!--end col-->
+                <div class="col-12">
+                    <h6 class="fw-semibold fs-16"><i class="mdi mdi-dots-grid"></i> Pendidikan Sebelumnya</h6>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="unit" class="form-label">Unit Pendidikan</label>
+                        <select id="unit" class="form-select" ng-model="main.studentData.unit_pendidikan" required>
+                            <option selected disabled value>silahkan pilih...</option>
+                            <option value="MTS">MTS</option>
+                            <option value="MA">MA</option>
+                        </select>
+                    </div>
+                </div><!--end col-->
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="pendaftaran" class="form-label">Jenis Pendaftaran</label>
+                        <select id="pendaftaran" class="form-select" ng-model="main.studentData.jenis_pendaftaran" required>
+                            <option selected disabled value>silahkan pilih...</option>
+                            <option value="Daftar Baru">Daftar Baru</option>
+                            <option value="Siswa Pindahan">Siswa Pindahan</option>
+                        </select>
+                    </div>
+                </div><!--end col-->
+                <div class="col-sm-6 col-md-6">
+                    <div class="mb-3">
+                        <label for="sekolahAsal" class="form-label">Nama Sekolah Asal</label>
+                        <input type="text" ng-model="main.studentData.sekolah_asal" class="form-control" placeholder="misal MTS Ciamis" id="sekolahAsal" required>
+                    </div>
+                </div><!--end col-->
+                <div class="col-sm-6 col-md-6">
+                    <div class="mb-3">
+                        <label for="jenjangSekolah" class="form-label">Jenjang Sekolah Asal</label>
+                        <input type="text" ng-model="main.studentData.jenjang_sekolah" class="form-control" placeholder="contoh: MI (Madrasah Ibtidaiyah)" id="jenjangSekolah" required>
+                    </div>
+                </div><!--end col-->
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Kata Sandi Akun</label>
+                        <input type="password" 
+                                ng-model="main.studentData.password" 
+                                class="form-control" 
+                                placeholder="kata sandi akun" 
+                                id="password1"
+                                name="password1"
+                                minlength="6"
+                                required
+                                ng-class="[
+                                    {'form-control is-invalid': formReg.password1.$error.minlength},
+                                    {'form-control is-valid': formReg.password1.$valid},
+                                    {'form-control' : formReg.password1}
+                                ]">
+                    </div>
+                </div><!--end col-->
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Konfirmasi Kata Sandi</label>
+                        <input type="password" 
+                                ng-model="main.studentData.password1" 
+                                class="form-control" 
+                                placeholder="tulis ulang kata sandi akun" 
+                                id="password2"
+                                name="password2"
+                                minlength="6"
+                                required
+                                ng-class="[
+                                    {'form-control is-invalid': formReg.password2.$error.minlength},
+                                    {'form-control is-valid': formReg.password2.$valid},
+                                    {'form-control' : formReg.password2}
+                                ]">
+                    </div>
+                </div><!--end col-->
+                <div class="col-lg-12">
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary" ng-disabled="formReg.$invalid">Kirim Data <i class="bx bx-send align-middle"></i></button>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </form>
+    </div>
+</div>

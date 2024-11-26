@@ -1,0 +1,81 @@
+<div class="card">
+    <div class="card-header align-items-center d-sm-flex">
+        <h6 class="card-title mb-0 flex-grow-1 fs-14">Pengguna | <span class="text-muted">menampilkan mitra</span></h6>
+        <div class="flex-shrink-0">
+            <button type="button" class="btn btn-light me-1" ng-click="dash.search = !dash.search"><i class="bx bx-search-alt-2 align-middle"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive table-card">
+            <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
+                <thead class="text-muted bg-light-subtle">
+                    <tr>
+                        <th>Nama</th>
+                        <th>Kontak</th>
+                        <th>Status</th>
+                        <th>Link Toko</th>
+                        <th>Alamat</th>
+                        <th>
+                            <div class="dropdown card-header-dropdown">
+                                <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="fw-semibold text-uppercase fs-12">Atur Tampilan:</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href>Penjualan Terbanyak</a>
+                                    <a class="dropdown-item" href>Penjualan Sedikit</a>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead><!-- end thead -->
+                <tbody>
+                    <tr ng-if="dash.search" class="bg-light">
+                        <td colspan="6">
+                            <form name="formSearch" ng-submit="dash.searchUser()">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" aria-label="search user" placeholder="cari pengguna berdasarkan nama" ng-model="dash.searchDataUser" required autofocus>
+                                    <button class="btn btn-primary" type="submit"><i class="bx bx-search-alt-2 align-middle"></i> Cari</button>
+                                    <button class="btn btn-soft-danger" type="button"><i class="mdi mdi-close-thick"></i> Reset</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="data in dash.listUsers | filter:dash.searchDataUser track by $index" ng-class="[{'bg-light shadow animation-show':data.editButton}, {'bg-light shadow animation-show':data.showButton}]">
+                        <td>
+                            <div class="d-flex">
+                                <div class="me-2">
+                                    <img ng-if="data.reward == false" ng-src="{{data.av}}" alt="{{data.name}}" class="avatar-xs rounded-circle">
+                                    <div class="avatar-xs" ng-if="data.reward == true">
+                                        <div class="avatar-title bg-warning-subtle text-warning rounded fs-24">
+                                            <i class="ri-medal-2-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 align-self-center" ng-mouseover="dash.hoverIn(data)" ng-mouseleave="dash.hoverOut(data)">
+                                    <h6 class="mb-2"><a href>{{data.name}}</a></h6>
+                                    <a ng-if="data.reward == true && !data.editButton" href class="text-body fs-12">Lihat Reward <i class="las la-angle-right"></i></a>
+                                    <a href="https://wa.me/{{data.wa}}" target="_blank" class="btn btn-success btn-sm" ng-class="{'animation-show':data.editButton}" ng-if="data.editButton"><i class="mdi mdi-whatsapp"></i> Chat WA</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="text-success mb-0">082119816893</p>
+                            <p class="text-muted mb-0">{{data.email}}</p>
+                        </td>
+                        <td ng-mouseenter="dash.btnActivate(data)" ng-mouseleave="dash.btnActivate(data)">
+                            <p class="mb-1"><span class="mb-0" ng-class="[{'text-success':data.status == 'Active'}, {'text-danger':data.status == 'Not Active'}]"><i class="mdi align-middle me-1" ng-class="[{'mdi-trending-up':data.status == 'Active'}, {'mdi-trending-down':data.status == 'Not Active'}]"></i>{{data.status}}</span></p>
+                            <button type="button" class="btn btn-info btn-sm" ng-click="dash.resetPass($index)" ng-if="data.showButton && data.status == 'Not Active'"><i class="mdi mdi-pen"></i> Aktifkan</button>
+                        </td>
+                        <td>https://shopee.id/linksaya</td>
+                        <td>Bandung, Jawa Barat</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-soft-dark waves-effect waves-light" ng-click="dash.aturReward($index)"><i class="mdi mdi-trophy-award"></i> Atur Award</button>
+                            <button type="button" class="btn btn-sm btn-soft-danger waves-effect waves-light" ng-click="dash.deleteUser($index)"><i class="mdi mdi-delete"></i> Hapus</button>
+                        </td>
+                    </tr><!-- end -->
+                </tbody><!-- end tbody -->
+            </table><!-- end table -->
+        </div><!-- end tbody -->
+
+    </div>
+</div>
